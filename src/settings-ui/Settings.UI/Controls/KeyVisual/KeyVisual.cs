@@ -2,6 +2,9 @@
 // The Microsoft Corporation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Globalization;
+using ManagedCommon;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Markup;
@@ -89,13 +92,15 @@ namespace Microsoft.PowerToys.Settings.UI.Controls
                 if (_keyVisual.Content.GetType() == typeof(string))
                 {
                     _keyVisual.Style = GetStyleSize("TextKeyVisualStyle");
-                    _keyVisual._keyPresenter.Content = _keyVisual.Content;
+                    _keyVisual._keyPresenter.Content = (string)_keyVisual.Content;
                 }
                 else
                 {
                     _keyVisual.Style = GetStyleSize("IconKeyVisualStyle");
 
-                    switch ((int)_keyVisual.Content)
+                    int test = (int)_keyVisual.Content;
+
+                    switch (test)
                     {
                         /* We can enable other glyphs in the future
                         case 13: // The Enter key or button.

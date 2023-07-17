@@ -1522,9 +1522,11 @@ PEXCEPTION
 pfn
 pfo
 pft
+PGDN
 pgp
 pgsql
 pguid
+PGUP
 PHANDLE
 phbm
 phbmp
