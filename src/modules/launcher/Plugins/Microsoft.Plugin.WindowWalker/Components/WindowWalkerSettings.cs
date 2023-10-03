@@ -34,6 +34,11 @@ namespace Microsoft.Plugin.WindowWalker.Components
         internal bool ResultsFromVisibleDesktopOnly { get; private set; }
 
         /// <summary>
+        /// Gets a value indicating whether we show the window icon in the search results or not.
+        /// </summary>
+        internal bool UseWindowIconInResults { get; private set; }
+
+        /// <summary>
         /// Gets a value indicating whether the process id is shown in the subtitle.
         /// </summary>
         internal bool SubtitleShowPid { get; private set; }
@@ -116,6 +121,13 @@ namespace Microsoft.Plugin.WindowWalker.Components
                 },
                 new PluginAdditionalOption
                 {
+                    Key = nameof(UseWindowIconInResults),
+                    DisplayLabel = Resources.wox_plugin_windowwalker_SettingUseWindowIconInResults,
+                    DisplayDescription = Resources.wox_plugin_windowwalker_SettingUseWindowIconInResults_Description,
+                    Value = false,
+                },
+                new PluginAdditionalOption
+                {
                     Key = nameof(SubtitleShowPid),
                     DisplayLabel = Resources.wox_plugin_windowwalker_SettingSubtitlePid,
                     Value = false,
@@ -177,6 +189,7 @@ namespace Microsoft.Plugin.WindowWalker.Components
             }
 
             ResultsFromVisibleDesktopOnly = GetSettingOrDefault(settings, nameof(ResultsFromVisibleDesktopOnly));
+            UseWindowIconInResults = GetSettingOrDefault(settings, nameof(UseWindowIconInResults));
             SubtitleShowPid = GetSettingOrDefault(settings, nameof(SubtitleShowPid));
             SubtitleShowDesktopName = GetSettingOrDefault(settings, nameof(SubtitleShowDesktopName));
             ConfirmKillProcess = GetSettingOrDefault(settings, nameof(ConfirmKillProcess));

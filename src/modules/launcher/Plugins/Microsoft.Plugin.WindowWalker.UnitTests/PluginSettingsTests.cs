@@ -22,11 +22,12 @@ namespace Microsoft.Plugin.WindowWalker.UnitTests
             var result = settings?.Length;
 
             // Assert
-            Assert.AreEqual(8, result);
+            Assert.AreEqual(9, result);
         }
 
         [DataTestMethod]
         [DataRow("ResultsFromVisibleDesktopOnly")]
+        [DataRow("UseWindowIconInResults")]
         [DataRow("SubtitleShowPid")]
         [DataRow("SubtitleShowDesktopName")]
         [DataRow("ConfirmKillProcess")]
@@ -48,6 +49,7 @@ namespace Microsoft.Plugin.WindowWalker.UnitTests
 
         [DataTestMethod]
         [DataRow("ResultsFromVisibleDesktopOnly", false)]
+        [DataRow("UseWindowIconInResults", false)]
         [DataRow("SubtitleShowPid", false)]
         [DataRow("SubtitleShowDesktopName", true)]
         [DataRow("ConfirmKillProcess", true)]
