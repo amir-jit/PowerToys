@@ -1584,9 +1584,13 @@ Made with 💗 by Microsoft and the PowerToys community.</value>
     <value>Light</value>
     <comment>Light refers to color, not weight</comment>
   </data>
-  <data name="Radio_Theme_Default.Content" xml:space="preserve">
-    <value>Windows default</value>
-    <comment>Windows refers to the Operating system</comment>
+  <data name="Radio_Theme_Windows_App_Default.Content" xml:space="preserve">
+    <value>Windows app default</value>
+    <comment>Uses the Windows OS app theme</comment>
+  </data>
+  <data name="Radio_Theme_Windows_System_Default.Content" xml:space="preserve">
+    <value>Windows system default</value>
+    <comment>Uses the Windows OS theme</comment>
   </data>
   <data name="Windows_Color_Settings.Content" xml:space="preserve">
     <value>Windows color settings</value>
