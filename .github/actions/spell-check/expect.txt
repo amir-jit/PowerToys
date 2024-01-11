@@ -34,8 +34,8 @@ ALPHATYPE
 AModifier
 AMPROPERTY
 AMPROPSETID
-animatedvisuals
 ANDSCANS
+animatedvisuals
 ansicolor
 ANull
 AOC
@@ -51,7 +51,6 @@ appdata
 APPEXECLINK
 appium
 Applicationcan
-applicationframehost
 appmanifest
 APPNAME
 appref
@@ -295,6 +294,7 @@ ddf
 DDxgi
 Deact
 debugbreak
+declatory
 decryptor
 Dedup
 DEFAULTBOOTSTRAPPERINSTALLFOLDER
@@ -937,6 +937,7 @@ MYICON
 NAMECHANGE
 namespaceanddescendants
 nao
+nauticalmiles
 NCACTIVATE
 ncc
 NCCALCSIZE
@@ -974,6 +975,7 @@ NIF
 NLD
 NLog
 NLSTEXT
+nmi
 NNN
 NOACTIVATE
 NOAGGREGATION
@@ -1068,6 +1070,7 @@ overlaywindow
 Oversampling
 OWNDC
 OWNERDRAW
+Packagemanager
 PACL
 PAINTSTRUCT
 PALETTEWINDOW
@@ -1213,7 +1216,6 @@ qit
 QITAB
 QITABENT
 qoi
-qps
 Quarternary
 QUERYENDSESSION
 QUERYOPEN
@@ -1548,6 +1550,7 @@ telephon
 templatenamespace
 Tenge
 testhost
+Testnmi
 testprocess
 TEXCOORD
 TEXTEXTRACTOR
@@ -1565,13 +1568,13 @@ timediff
 timeunion
 timeutil
 Titlecase
-TKey
 TLayout
 tlb
 tlbimp
 TMPVAR
 TNP
 toggleswitch
+Tonmi
 toolkitcontrols
 toolkitconverters
 Toolset
@@ -1590,7 +1593,6 @@ trl
 Tsd
 TServer
 TStr
-TValue
 tweakme
 TWF
 tymed

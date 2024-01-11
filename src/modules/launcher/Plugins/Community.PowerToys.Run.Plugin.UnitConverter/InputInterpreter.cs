@@ -170,6 +170,27 @@ namespace Community.PowerToys.Run.Plugin.UnitConverter
         }
 
         /// <summary>
+        /// nmi is not recognized by UniteNets. Add nmi as an abbreviation for nautical mile.
+        /// </summary>
+        public static void NauticalMileTonmi(ref string[] split)
+        {
+            if (split.Length < 4)
+            {
+                return;
+            }
+
+            if (split[1].Equals("nmi", StringComparison.OrdinalIgnoreCase))
+            {
+                split[1] = "nauticalmiles";
+            }
+
+            if (split[3].Equals("nmi", StringComparison.OrdinalIgnoreCase))
+            {
+                split[3] = "nauticalmiles";
+            }
+        }
+
+        /// <summary>
         /// Converts spelling "metre" to "meter", also for centimetre and other variants
         /// </summary>
         public static void MetreToMeter(ref string[] split)
@@ -229,6 +250,7 @@ namespace Community.PowerToys.Run.Plugin.UnitConverter
             InputInterpreter.DegreePrefixer(ref split);
             InputInterpreter.MetreToMeter(ref split);
             InputInterpreter.FeetToFt(ref split);
+            InputInterpreter.NauticalMileTonmi(ref split);
             InputInterpreter.GallonHandler(ref split, CultureInfo.CurrentCulture);
             if (!double.TryParse(split[0], out double value))
             {
