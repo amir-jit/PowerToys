@@ -15,27 +15,37 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ItemsControl
+        <Border
+            Padding="8,4"
             VerticalAlignment="Center"
-            AutomationProperties.AccessibilityView="Raw"
-            IsTabStop="False"
-            ItemsSource="{x:Bind Keys}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Spacing="4" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <controls:KeyVisual
-                        VerticalAlignment="Center"
-                        AutomationProperties.AccessibilityView="Raw"
-                        Content="{Binding}"
-                        IsTabStop="False"
-                        VisualType="SmallOutline" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            Background="{ThemeResource ControlFillColorDefaultBrush}"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+            BorderThickness="1"
+            CornerRadius="{StaticResource ControlCornerRadius}">
+
+
+            <ItemsControl
+                VerticalAlignment="Center"
+                AutomationProperties.AccessibilityView="Raw"
+                IsTabStop="False"
+                ItemsSource="{x:Bind Keys}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="12" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:KeyVisual
+                            VerticalAlignment="Center"
+                            AutomationProperties.AccessibilityView="Raw"
+                            Content="{Binding}"
+                            FontSize="12"
+                            Style="{StaticResource TextKeyVisualStyle}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
         <tk7controls:MarkdownTextBlock
             Grid.Column="1"
             VerticalAlignment="Center"
