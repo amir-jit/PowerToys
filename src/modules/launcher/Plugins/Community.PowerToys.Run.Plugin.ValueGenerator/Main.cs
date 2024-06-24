@@ -7,8 +7,10 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
+using Community.PowerToys.Run.Plugin.ValueGenerator.Helper;
 using Community.PowerToys.Run.Plugin.ValueGenerator.Properties;
 using ManagedCommon;
+using Wox.Infrastructure;
 using Wox.Plugin;
 using Wox.Plugin.Logger;
 
@@ -59,6 +61,19 @@ namespace Community.PowerToys.Run.Plugin.ValueGenerator
             }
         }
 
+        private static string GetIcoPath(bool warning = false)
+        {
+            var imageName = warning ? "Warning" : "ValueGenerator";
+            if (_isLightTheme)
+            {
+                return $"Images/{imageName}.light.png";
+            }
+            else
+            {
+                return $"Images/{imageName}.dark.png";
+            }
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -90,6 +105,11 @@ namespace Community.PowerToys.Run.Plugin.ValueGenerator
             ArgumentNullException.ThrowIfNull(query);
 
             var results = new List<Result>();
+            if (string.IsNullOrWhiteSpace(query?.Search) && !string.IsNullOrEmpty(query?.ActionKeyword))
+            {
+                return GetSuggestionResults(query, results);
+            }
+
             try
             {
                 IComputeRequest computeRequest = _inputParser.ParseInput(query);
@@ -110,7 +130,31 @@ namespace Community.PowerToys.Run.Plugin.ValueGenerator
             }
             catch (FormatException e)
             {
-               Log.Debug(GetTranslatedPluginTitle() + ": " + e.Message, GetType());
+                Log.Debug(GetTranslatedPluginTitle() + ": " + e.Message, GetType());
+                if (!string.IsNullOrEmpty(query.ActionKeyword))
+                {
+                    return GetSuggestionFuzzyResults(query, results);
+                }
+            }
+
+            return results;
+        }
+
+        private List<Result> GetSuggestionResults(Query query, List<Result> results)
+        {
+            foreach (var generatorItem in QueryHelper.GeneratorList)
+            {
+                results.Add(new Result
+                {
+                    Title = generatorItem.Key,
+                    SubTitle = generatorItem.Value,
+                    IcoPath = GetIcoPath(),
+                    Action = c =>
+                    {
+                        _context.API.ChangeQuery($"{query.ActionKeyword} {generatorItem.Key}");
+                        return false;
+                    },
+                });
             }
 
             return results;
@@ -124,7 +168,7 @@ namespace Community.PowerToys.Run.Plugin.ValueGenerator
             {
                 ContextData = request.Result,
                 Title = request.ResultToString(),
-                IcoPath = _isLightTheme ? "Images/ValueGenerator.light.png" : "Images/ValueGenerator.dark.png",
+                IcoPath = GetIcoPath(),
                 Score = 300,
                 SubTitle = request.Description,
                 Action = c =>
@@ -150,13 +194,39 @@ namespace Community.PowerToys.Run.Plugin.ValueGenerator
             };
         }
 
+        private List<Result> GetSuggestionFuzzyResults(Query query, List<Result> results)
+        {
+            foreach (var generatorItem in QueryHelper.GeneratorList)
+            {
+                var matchScore = StringMatcher.FuzzySearch(query.Search, generatorItem.Key).Score;
+
+                if (matchScore > 0)
+                {
+                    results.Add(new Result
+                    {
+                        Title = generatorItem.Key,
+                        SubTitle = generatorItem.Value,
+                        IcoPath = GetIcoPath(),
+                        Score = matchScore,
+                        Action = c =>
+                        {
+                            _context.API.ChangeQuery($"{query.ActionKeyword} {generatorItem.Key}");
+                            return false;
+                        },
+                    });
+                }
+            }
+
+            return results;
+        }
+
         private Result GetErrorResult(string errorMessage)
         {
             return new Result
             {
                 Title = Resources.error_title,
                 SubTitle = errorMessage,
-                IcoPath = _isLightTheme ? "Images/Warning.light.png" : "Images/Warning.dark.png",
+                IcoPath = GetIcoPath(warning: true),
                 Action = _ => { return true; },
             };
         }
